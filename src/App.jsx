@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import './App.css';
+import SearchBar from './components/Searchbar';
 
 const emails = [
   {
@@ -70,9 +72,43 @@ const people = [
 ]
 
 function App() {
+  const [data, setData] = useState([...people, ...calendar, ...emails])
+  const [selection, setSelection] = useState(null)
+  const [currentOption, setCurrentOption] = useState("all")  
+
+  function handleClick(e){
+    const op = e.target.name
+    switch (op) {
+      case "all":
+        setData([...people, ...emails, ...calendar]);
+        setCurrentOption("all");
+        break;
+
+      case "people":
+        setData([...people]);
+        setCurrentOption("people");
+        break;
+
+      case "emails":
+        setData([...emails]);
+        setCurrentOption("emails");
+        break;
+
+      case "calendar":
+        setData([...calendar]);
+        setCurrentOption("calendar");
+        break;      
+    }
+  }
   return (
     <div>
-      Hola mundo
+      <button onClick={handleClick} name="all">All</button>
+      <button onClick={handleClick} name="people">People</button>
+      <button onClick={handleClick} name="calendar">Calendar</button>
+      <button onClick={handleClick} name="emails">Emails</button>
+      
+      <SearchBar items={data} onItemSelected={()=>{}}/>
+
     </div>
   );
 }
