@@ -1,8 +1,23 @@
 import { useState, useMemo, useEffect } from "react"
 import MarketItem from "./MarketItem"
+
+import styled from "styled-components";
+
+const ResultsContainer = styled.div`
+  position: absolute;
+  width: 400px;
+  background: white;
+  border: solid 1px #222;
+  border-top: solid 1px transparent;
+  margin-top: -3px;
+  box-sizing: border-box;
+  border-radius: 0 0 5px 5px;
+`;
 const Results = ({items, onItemSelected, query, onResultsCalculated}) => {
     const [results, setResults] = useState([])
     const filteredItems = useMemo(()=> findMatch(items, query),[items, query]) 
+
+
 
     useEffect(()=>{
         onResultsCalculated(results)
@@ -17,17 +32,15 @@ const Results = ({items, onItemSelected, query, onResultsCalculated}) => {
         setResults(res)        
         return res
     }
-    function onItemSelected(){
 
-    }
     return(
-        <div>
+        <ResultsContainer>
             {
                 query !== "" ?
                 filteredItems.map((item)=>(<MarketItem key={item.id} item={item} query={query} onClick={onItemSelected}/>))
                 : ""
             }
-        </div>
+        </ResultsContainer>
     )
 }
 export default Results
