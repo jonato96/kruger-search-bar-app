@@ -21,6 +21,7 @@ const Results = ({items, onItemSelected, query, onResultsCalculated}) => {
 
     useEffect(()=>{
         onResultsCalculated(results)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[results])
     function findMatch(items,query){
         const res = items.filter((i)=>{

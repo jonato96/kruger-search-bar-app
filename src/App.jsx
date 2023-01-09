@@ -116,7 +116,8 @@ function App() {
       case "calendar":
         setData([...calendar]);
         setCurrentOption("calendar");
-        break;      
+        break;    
+      default:  
     }
   }
   function handleItemSelected(item){
@@ -124,7 +125,7 @@ function App() {
   }
   return (
     <div>
-      <StyledButton onClick={handleClick} name="all">All</StyledButton>
+      <StyledButton name ={currentOption} onClick={handleClick}>All</StyledButton>
       <StyledButton onClick={handleClick} name="people">People</StyledButton>
       <StyledButton onClick={handleClick} name="calendar">Calendar</StyledButton>
       <StyledButton onClick={handleClick} name="emails">Emails</StyledButton>
