@@ -11,7 +11,7 @@ const SearchBar = ({items, onItemSelected}) => {
     return (
         <div>
             <input type="text" onChange={handleChange} value = {query}/>
-            <Results items = {items} onItemSelected={()=>{}} onResultsCalculated={()=>{}}/>
+            <Results items = {items} query={query} onItemSelected={()=>{}} onResultsCalculated={()=>{}}/>
         </div>
     )
 }
