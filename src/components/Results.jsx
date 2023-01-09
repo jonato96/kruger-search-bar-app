@@ -1,7 +1,12 @@
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import MarketItem from "./MarketItem"
 const Results = ({items, onItemSelected, query, onResultsCalculated}) => {
     const [results, setResults] = useState([])
     const filteredItems = useMemo(()=> findMatch(items, query),[items, query]) 
+
+    useEffect(()=>{
+        onResultsCalculated(results)
+    },[results])
     function findMatch(items,query){
         const res = items.filter((i)=>{
             return (
@@ -12,11 +17,14 @@ const Results = ({items, onItemSelected, query, onResultsCalculated}) => {
         setResults(res)        
         return res
     }
+    function onItemSelected(){
+
+    }
     return(
         <div>
             {
                 query !== "" ?
-                filteredItems.map((item)=>(<div key={item.id}>{item.title}</div>))
+                filteredItems.map((item)=>(<MarketItem key={item.id} item={item} query={query} onClick={onItemSelected}/>))
                 : ""
             }
         </div>
